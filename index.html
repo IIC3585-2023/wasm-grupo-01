@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WASM</title>
-  </head>
-  <body>
-    <div id="app">
-      <h1 class="text-4xl font-bold">WASM</h1>
-      <p>Abre la consola pq Tony se le olvido hacer return</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./assets/wasum_logo.png" type="image/png">
+  <title>WASM</title>
+</head>
+
+<body class="bg-gray-100">
+  <div class="container mx-auto mt-8 text-center">
+    <h1 class="text-3xl font-semibold mb-4">Comparison of JS and WASM</h1>
+    <h2 class="text-2xl font-semibold mb-4">Assign Actions to Cores</h2>
+    <p class="text-gray-600 mb-4">(Abre la consola para sapear)</p>
+    <div class="flex">
+      <form class="flex w-full">
+        <div class="w-1/2 mr-4">
+          <label class="block mb-2 font-medium" for="numActions">Numer of actions:</label>
+          <input
+            class="w-full px-3 py-2 mb-4 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+            type="number" id="numActions" name="numActions" required>
+
+          <label class="block mb-2 font-medium" for="actionDurations">Duration of each action (comma separated):</label>
+          <input
+            class="w-full px-3 py-2 mb-4 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+            type="text" id="actionDurations" name="actionDurations" required>
+
+          <p id="validationMessage" class="text-red-500 text-sm">Falta agregar validación acá</p>
+
+          <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Normal
+            JS</button>
+          <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
+            type="submit">Optimus JS</button>
+          <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">WASM
+            (C++) </button>
+        </div>
+        <div class="w-1/2">
+          <label class="block mb-2 font-medium" for="numCores">Number of cores:</label>
+          <input
+            class="w-full px-3 py-2 mb-4 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+            type="number" id="numCores" name="numCores" required>
+        </div>
+        
+      </form>
     </div>
-    <script type="module" src="./app/main.js"></script>
-  </body>
+  </div>
+  <script type="module" src="./app/main.js"></script>
+</body>
+
 </html>

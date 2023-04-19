@@ -34,6 +34,7 @@ Result assignJobs(int N, const std::vector<int>& durations, int M) {
 }
 
 int main() {
+  std::cout << "Respuesta en C++" << std::endl;
   int N = 5;
   std::vector<int> durations = {30, 50, 10, 20, 90};
   int M = 2;
