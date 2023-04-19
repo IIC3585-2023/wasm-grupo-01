@@ -24,6 +24,12 @@ npm install -g pnpm
 pnpm install
 ```
 
+### Install Emscripten and add to environment
+
+1. Download Emscripten from <https://emscripten.org/docs/getting_started/downloads.html>
+2. Add to environment with `source ./emsdk_env.sh`
+3. Build the wasm with `pnpm run build:emscripten`
+
 ### Run script
 
 ```bash
