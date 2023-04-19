@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
     "preview": "vite preview",
-    "build:emscripten": "emcc func/scheduler.c -s EXPORT_ES6=1 -o func/emscripten/scheduler.js"
+    "build": "vite build",
+    "build:emscripten": "emcc func/scheduler.cpp -s EXPORT_ES6=1 -o func/emscripten/scheduler.js"
   },
   "devDependencies": {
     "vite": "^4.2.0",
