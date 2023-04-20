@@ -8,6 +8,7 @@ dist-ssr
 !.vscode/extensions.json
 .DS_Store
 
+/target
 *.wasm
 /func/emscripten/*
 !.gitkeep

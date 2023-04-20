@@ -1,13 +1,15 @@
 import "./style.css";
 
 import emscripten from "../func/emscripten/scheduler.js";
+import { assign_jobs as rust } from "../func/rust";
 import { assignJobs as javascriptNormal } from "../func/schedulerNormal.js";
 import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
 
 async function runAndDisplay(name, fn, bins, durations) {
   // console.log("Running", name, bins, durations);
   console.time(name);
-  await fn(bins, durations);
+  const result = await fn(bins, durations);
+  console.log(result);
   console.timeEnd(name);
 }
 
@@ -17,6 +19,7 @@ window.addEventListener("load", async () => {
   const functions = {
     "js-slow": javascriptNormal,
     "js-optimus": javascriptOptimus,
+    "rust-wasm-pack": (bins, durations) => rust(bins.length, bins, durations),
     "cpp-emscripten": async (bins, durations) => {
       await emscripten();
     },
