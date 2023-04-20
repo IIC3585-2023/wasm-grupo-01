@@ -18,7 +18,7 @@ extern "C" void write_vector(int X) {
 }
 
 extern "C" int assignJobs(int M, int N) {
-  std::cout << "[C++] Log schedulerNormal.cpp" << std::endl;
+  std::cout << "[C++] Log scheduler.cpp" << std::endl;
   // std::cout << M << std::endl;
   // for (int i = 0; i < N; i++) {
   //   std::cout << myVector[i] << " ";

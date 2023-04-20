@@ -7,7 +7,7 @@ import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
 async function runAndDisplay(name, fn, bins, durations) {
   console.log("Running", name);
   const startTime = performance.now();
-  const result = await fn(bins, durations);
+  const result = fn(bins, durations);
   const endTime = performance.now();
   console.log(result);
   const delta = endTime - startTime
@@ -18,16 +18,16 @@ async function runAndDisplay(name, fn, bins, durations) {
 
 window.addEventListener("load", async () => {
   const runForm = document.getElementById("run-form");
-
+  
+  const { _assignJobs, _write_vector } = await emscripten();
   const functions = {
-    "js-normal": async (bins, durations) => {
+    "js-normal": (bins, durations) => {
       return javascriptNormal(bins, durations);
     },
-    "js-optimus": async (bins, durations) => {
+    "js-optimus": (bins, durations) => {
       return javascriptOptimus(bins, durations);
     },
-    "cpp-emscripten": async (bins, durations) => {
-      const { _assignJobs, _write_vector } = await emscripten();
+    "cpp-emscripten": (bins, durations) => {
       for (const duration of durations) {
         _write_vector(duration);
       }
