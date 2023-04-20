@@ -7,7 +7,8 @@
     "dev": "vite",
     "preview": "vite preview",
     "build": "vite build",
-    "build:emscripten": "emcc func/scheduler.cpp -O3 -s EXPORT_ES6=1 -o func/emscripten/scheduler.js"
+    "build:emscripten": "emcc func/scheduler.cpp -O3 -s EXPORTED_FUNCTIONS=_main,_assignJobs,_write_vector,_malloc,_free -s EXPORTED_RUNTIME_METHODS=ccall -s EXPORT_ES6=1 -o func/emscripten/scheduler.js",
+    "build:emscripten:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm"
   },
   "devDependencies": {
     "vite": "^4.2.0",

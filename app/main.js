@@ -5,20 +5,33 @@ import { assignJobs as javascriptNormal } from "../func/schedulerNormal.js";
 import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
 
 async function runAndDisplay(name, fn, bins, durations) {
-  // console.log("Running", name, bins, durations);
-  console.time(name);
-  await fn(bins, durations);
-  console.timeEnd(name);
+  console.log("Running", name);
+  const startTime = performance.now();
+  const result = await fn(bins, durations);
+  const endTime = performance.now();
+  console.log(result);
+  const delta = endTime - startTime
+  console.log(`${name}: ${delta}ms`);
+  const div = document.getElementById(name);
+  div.innerHTML = `Got ${result} in ${delta}ms`;
 }
 
 window.addEventListener("load", async () => {
   const runForm = document.getElementById("run-form");
 
   const functions = {
-    "js-slow": javascriptNormal,
-    "js-optimus": javascriptOptimus,
+    "js-normal": async (bins, durations) => {
+      return javascriptNormal(bins, durations);
+    },
+    "js-optimus": async (bins, durations) => {
+      return javascriptOptimus(bins, durations);
+    },
     "cpp-emscripten": async (bins, durations) => {
-      await emscripten();
+      const { _assignJobs, _write_vector } = await emscripten();
+      for (const duration of durations) {
+        _write_vector(duration);
+      }
+      return _assignJobs(bins, durations.length);
     },
   };
 
