@@ -38,8 +38,8 @@ jobs:
           cache: "pnpm"
 
       # Build
-      - run: "npm run build:rust"
       - run: pnpm install
+      - run: "npm run build:rust"
       - run: "npm run build:emscripten"
       - run: "npm run build:assemblyscript"
       - run: npm run build
