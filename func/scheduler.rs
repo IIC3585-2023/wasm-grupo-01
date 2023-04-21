@@ -1,14 +1,16 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn assign_jobs(m: usize, durations: &[u32]) -> Vec<u32> {
-    let mut total_times = vec![0; m];
-    let mut clusters = vec![Vec::new(); m];
+pub fn assign_jobs(bins: usize, durations: &[u32]) -> Vec<u32> {
+    let mut total_times = vec![0; bins];
+    let mut clusters = vec![Vec::new(); bins];
+
     let mut jobs: Vec<(usize, u32)> = durations
         .iter()
         .enumerate()
         .map(|(i, &duration)| (i, duration))
         .collect();
+
     jobs.sort_by_key(|&(_, duration)| duration);
 
     for (index, duration) in jobs.iter().rev() {

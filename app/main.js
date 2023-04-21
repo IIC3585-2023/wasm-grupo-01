@@ -19,7 +19,7 @@ window.addEventListener("load", async () => {
   const functions = {
     "js-slow": javascriptNormal,
     "js-optimus": javascriptOptimus,
-    "rust-wasm-pack": (bins, durations) => rust(bins.length, bins, durations),
+    "rust-wasm-pack": rust,
     "cpp-emscripten": async (bins, durations) => {
       await emscripten();
     },
