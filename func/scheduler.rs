@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn assign_jobs(bins: usize, durations: &[u32]) -> Vec<u32> {
+pub fn assign_jobs(bins: usize, durations: &[u32]) -> u32 {
     let mut total_times = vec![0; bins];
     let mut clusters = vec![Vec::new(); bins];
 
@@ -25,11 +25,12 @@ pub fn assign_jobs(bins: usize, durations: &[u32]) -> Vec<u32> {
     }
 
     let total_time = *total_times.iter().max().unwrap();
-    let mut result = Vec::new();
-    for cluster in clusters {
-        result.extend(cluster.iter().map(|&index| index as u32));
-    }
+    total_time
+    // let mut result = Vec::new();
+    // for cluster in clusters {
+    //     result.extend(cluster.iter().map(|&index| index as u32));
+    // }
 
-    result.push(total_time);
-    result
+    // result.push(total_time);
+    // result
 }
