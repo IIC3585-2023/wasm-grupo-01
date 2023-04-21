@@ -24,13 +24,5 @@ pub fn assign_jobs(bins: usize, durations: &[u32]) -> u32 {
         total_times[min_total_time_cluster] += duration;
     }
 
-    let total_time = *total_times.iter().max().unwrap();
-    total_time
-    // let mut result = Vec::new();
-    // for cluster in clusters {
-    //     result.extend(cluster.iter().map(|&index| index as u32));
-    // }
-
-    // result.push(total_time);
-    // result
+    *total_times.iter().max().unwrap()
 }

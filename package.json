@@ -9,9 +9,11 @@
     "build": "vite build",
     "build:rust": "wasm-pack build --release -m no-install --out-dir func/rust",
     "build:emscripten": "emcc func/scheduler.cpp -O3 -s EXPORTED_FUNCTIONS=_main,_assignJobs,_write_vector,_malloc,_free -s EXPORTED_RUNTIME_METHODS=ccall -s EXPORT_ES6=1 -o func/emscripten/scheduler.js",
-    "build:emscripten:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm"
+    "build:emscripten:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm",
+    "build:assemblyscript": "asc func/assemblyscript/index.ts --target release"
   },
   "devDependencies": {
+    "assemblyscript": "^0.27.2",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.22",
     "tailwindcss": "^3.3.1",

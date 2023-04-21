@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  assemblyscript: ^0.27.2
   autoprefixer: ^10.4.14
   postcss: ^8.4.22
   tailwindcss: ^3.3.1
@@ -8,6 +9,7 @@ specifiers:
   vite-plugin-wasm: ^3.2.2
 
 devDependencies:
+  assemblyscript: 0.27.2
   autoprefixer: 10.4.14_postcss@8.4.22
   postcss: 8.4.22
   tailwindcss: 3.3.1_postcss@8.4.22
@@ -285,6 +287,15 @@ packages:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
     dev: true
 
+  /assemblyscript/0.27.2:
+    resolution: {integrity: sha512-uTiUFkiXkVpsY3votMjmPuA9vvL/vHuUrtH+VtVKCl+BM+1OqXFO7j53FYA4L9QtVJA9KQDYXSVnZ5LFad668w==}
+    engines: {node: '>=16', npm: '>=7'}
+    hasBin: true
+    dependencies:
+      binaryen: 112.0.0-nightly.20230411
+      long: 5.2.3
+    dev: true
+
   /autoprefixer/10.4.14_postcss@8.4.22:
     resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
     engines: {node: ^10 || ^12 || >=14}
@@ -308,6 +319,11 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
+    dev: true
+
+  /binaryen/112.0.0-nightly.20230411:
+    resolution: {integrity: sha512-4V9r9x9fjAVFZdR2yvBFc3BEJJIBYvd2X8X8k0zAuJsao2gl9wNHDmpQ30QsLo6hgkRfRImkCbCjhXW3RDOYXQ==}
+    hasBin: true
     dev: true
 
   /brace-expansion/1.1.11:
@@ -554,6 +570,10 @@ packages:
 
   /lines-and-columns/1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
+    dev: true
+
+  /long/5.2.3:
+    resolution: {integrity: sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q==}
     dev: true
 
   /merge2/1.4.1:

@@ -4,17 +4,18 @@ import emscripten from "../func/emscripten/scheduler.js";
 import { assign_jobs as rust } from "../func/rust";
 import { assignJobs as javascriptNormal } from "../func/schedulerNormal.js";
 import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
+import { assignJobs as assemblyscript } from "../func/assemblyscript/dist/release";
 
 async function runAndDisplay(name, fn, bins, durations) {
   console.log("Running", name);
   const startTime = performance.now();
-  const result = fn(bins, durations);
+  const results = new Array(1_000).fill(null).map(() => fn(bins, durations));
   const endTime = performance.now();
-  console.log(result);
+  console.log(results[0]);
   const delta = endTime - startTime;
   console.log(`${name}: ${delta}ms`);
   const div = document.getElementById(name);
-  div.innerHTML = `Got ${result} in ${delta}ms`;
+  div.innerHTML = `Got ${results[0]} in ${delta}ms`;
 }
 
 window.addEventListener("load", async () => {
@@ -36,6 +37,9 @@ window.addEventListener("load", async () => {
     },
     "rust-wasm-pack": (bins, durations) => {
       return rust(bins, durations);
+    },
+    assemblyscript: (bins, durations) => {
+      return assemblyscript(bins, durations);
     },
   };
 
