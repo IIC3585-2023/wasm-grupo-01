@@ -26,6 +26,7 @@ jobs:
       # Setup
       - uses: actions/checkout@v3
       - uses: mymindstorm/setup-emsdk@v11
+      - uses: jetli/wasm-pack-action@v0.4.0
       - uses: pnpm/action-setup@v2
         with:
           version: 7
@@ -38,6 +39,8 @@ jobs:
       # Build
       - run: pnpm install
       - run: "npm run build:emscripten"
+      - run: "npm run build:rust"
+      - run: "npm run build:assemblyscript"
       - run: npm run build
 
       # Deploy
