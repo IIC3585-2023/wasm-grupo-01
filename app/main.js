@@ -1,6 +1,7 @@
 import "./style.css";
 
 import emscripten from "../func/emscripten/scheduler.js";
+import { assign_jobs as rust } from "../func/rust";
 import { assignJobs as javascriptNormal } from "../func/schedulerNormal.js";
 import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
 
@@ -10,7 +11,7 @@ async function runAndDisplay(name, fn, bins, durations) {
   const result = fn(bins, durations);
   const endTime = performance.now();
   console.log(result);
-  const delta = endTime - startTime
+  const delta = endTime - startTime;
   console.log(`${name}: ${delta}ms`);
   const div = document.getElementById(name);
   div.innerHTML = `Got ${result} in ${delta}ms`;
@@ -18,7 +19,7 @@ async function runAndDisplay(name, fn, bins, durations) {
 
 window.addEventListener("load", async () => {
   const runForm = document.getElementById("run-form");
-  
+
   const { _assignJobs, _write_vector } = await emscripten();
   const functions = {
     "js-normal": (bins, durations) => {
@@ -32,6 +33,9 @@ window.addEventListener("load", async () => {
         _write_vector(duration);
       }
       return _assignJobs(bins, durations.length);
+    },
+    "rust-wasm-pack": (bins, durations) => {
+      return rust(bins, durations);
     },
   };
 

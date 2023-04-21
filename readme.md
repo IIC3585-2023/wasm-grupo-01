@@ -30,6 +30,12 @@ pnpm install
 2. Add to environment with `source ./emsdk_env.sh`
 3. Build the wasm with `pnpm run build:emscripten`
 
+### Install Wasm-Pack
+
+1. Install Rust with RustUp <https://rustup.rs/>
+2. Go to <https://rustwasm.github.io/wasm-pack/installer>
+3. Build WASM with `pnpm run build:rust`
+
 ### Run script
 
 ```bash
