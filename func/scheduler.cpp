@@ -1,8 +1,10 @@
 #include <algorithm>
 #include <iostream>
+#include <mutex>
 #include <vector>
 
 std::vector<int> myVector;
+std::mutex myVectorMutex;
 
 struct Job {
   int duration;
@@ -14,7 +16,11 @@ bool compareJobs(const Job& a, const Job& b) {
 }
 
 extern "C" void write_vector(int X) {
+  // Lock the mutex before accessing myVector
+  std::unique_lock<std::mutex> lock(myVectorMutex);
   myVector.push_back(X);
+  // Unlock the mutex after accessing myVector
+  lock.unlock();
 }
 
 extern "C" int assignJobs(int M, int N) {
