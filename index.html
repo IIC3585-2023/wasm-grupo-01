@@ -51,14 +51,27 @@
             />
           </div>
           <div>
-            <label class="block font-medium pl-1 text-gray-600" for="actionDurations">Iterations</label>
+            <label class="block font-medium pl-1 text-gray-600" for="iterations">Iterations</label>
             <input
               class="h-10 w-36 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
               type="number"
-              id="actionDurations"
-              placeholder="1000000"
-              value="10000000"
-              name="durations"
+              id="iterations"
+              placeholder="1000"
+              value="1000"
+              name="iterations"
+              pattern="^([0-9]+, *)*[0-9]+$"
+              required
+            />
+          </div>
+          <div>
+            <label class="block font-medium pl-1 text-gray-600" for="repetitions">Repetitions</label>
+            <input
+              class="h-10 w-36 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              type="number"
+              id="repetitions"
+              placeholder="1000"
+              value="1000"
+              name="repetitions"
               pattern="^([0-9]+, *)*[0-9]+$"
               required
             />

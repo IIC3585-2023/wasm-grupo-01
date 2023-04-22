@@ -17,14 +17,15 @@ window.addEventListener("load", async () => {
     const formData = new FormData(form);
     const bins = Number(formData.get("bins"));
     const durations = (formData.get("durations") as string).split(",").map(Number);
+    const iterations = Number(formData.get("iterations"));
+    const repetitions = Number(formData.get("repetitions"));
 
     event.preventDefault();
     cancelCurrent();
 
-    console.log("Running", name);
     const fns = functionNames.map((name) => ({
       element: document.getElementById(name)!,
-      observable: createRunObservable({ name, bins, durations, iterations: 1000, repetitions: 10_000 }),
+      observable: createRunObservable({ name, bins, durations, iterations, repetitions }),
     }));
 
     const runSubscription = concat(
@@ -32,7 +33,7 @@ window.addEventListener("load", async () => {
     ).subscribe({
       complete: () => console.log("Done"),
       next: ({ element, average, result }) => {
-        element.innerHTML = `Result: ${result} (Average: ${average.toFixed(2)}ms)`;
+        element.innerHTML = `Result: ${result} (Average: ${average.toFixed(5)}ms)`;
       },
     });
     cancelCurrent = () => runSubscription.unsubscribe();
