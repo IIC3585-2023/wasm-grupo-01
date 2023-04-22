@@ -2,11 +2,10 @@ import { Observable } from "rxjs";
 import { scan } from "rxjs/operators";
 
 import type { WorkerMessage, WorkerResponse, WorkerInstruction } from "./types";
-import RunnerWorker from "./worker?worker";
 
 export function createRunObservable(api: WorkerInstruction) {
   const observable = new Observable<WorkerResponse>((observer) => {
-    const worker = new RunnerWorker();
+    const worker = new Worker(new URL("./worker.ts", import.meta.url), { type: "module" });
     worker.addEventListener("error", (event) => observer.error(event.error));
     worker.addEventListener("message", (event) => {
       const data: WorkerMessage = event.data;
