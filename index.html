@@ -4,21 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/wasum_logo.png" type="image/png" />
-    <script defer type="module" src="./app/main.js"></script>
+    <script defer type="module" src="./app/main.ts"></script>
     <title>WASM</title>
   </head>
 
   <body class="bg-gray-100">
     <div class="container mx-auto mt-8">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+      <div class="mb-2 text-gray-600">
+        <h1 class="text-3xl font-bold text-gray-800">
           Comparison of
           <span class="text-yellow-500">JS</span>
           and
           <span class="text-purple-500">WASM</span>
         </h1>
-        <h2 class="text-2xl font-semibold mb-4">Assign Actions to Cores</h2>
-        <p class="text-gray-600 mb-4">(Abre la consola para sapear)</p>
+        <h2 class="text-2xl font-semibold">Assign Actions to Cores</h2>
       </div>
 
       <form id="run-form">
@@ -26,7 +25,7 @@
           <div>
             <label class="block font-medium pl-1 text-gray-600" for="numCores">Cores</label>
             <input
-              class="w-24 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              class="h-10 w-24 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
               type="number"
               id="numCores"
               min="2"
@@ -41,7 +40,7 @@
               >Duration of actions (coma separated)</label
             >
             <input
-              class="w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              class="h-10 w-full px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
               type="text"
               id="actionDurations"
               placeholder="30,50,10,20,90"
@@ -51,6 +50,20 @@
               required
             />
           </div>
+          <div>
+            <label class="block font-medium pl-1 text-gray-600" for="actionDurations">Iterations</label>
+            <input
+              class="h-10 w-36 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              type="number"
+              id="actionDurations"
+              placeholder="1000000"
+              value="10000000"
+              name="durations"
+              pattern="^([0-9]+, *)*[0-9]+$"
+              required
+            />
+          </div>
+          <button class="h-10 ml-2 border bg-purple-700 mt-6 rounded px-3 py-2 text-purple-100">Run</button>
         </div>
 
         <div>
