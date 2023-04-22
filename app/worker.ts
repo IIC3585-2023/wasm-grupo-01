@@ -1,28 +1,39 @@
-import emscripten from "../func/emscripten/scheduler.js";
-import { assign_jobs as rust } from "../func/rust/wasm_grupo_01";
-import { assignJobs as javascriptNormal } from "../func/schedulerNormal.js";
-import { assignJobs as javascriptOptimus } from "../func/schedulerOptimus.js";
-import { assignJobs as assemblyscript } from "../func/assemblyscript/dist/release";
-
-const { _assignJobs, _write_vector } = await emscripten();
-
-const functions = {
-  "js-normal": (bins, durations) => javascriptNormal(bins, durations),
-  "js-optimus": (bins, durations) => javascriptOptimus(bins, durations),
-  "cpp-emscripten": (bins, durations) => {
-    for (const duration of durations) _write_vector(duration);
-    return _assignJobs(bins, durations.length);
+const loadFunction = {
+  "js-normal": async () => {
+    const { assignJobs } = await import("../func/schedulerNormal.js");
+    return assignJobs;
   },
-  "rust-wasm-pack": (bins, durations) => rust(bins, durations), // @ts-ignore
-  assemblyscript: assemblyscript,
-} satisfies Record<string, (bins: number, durations: number[]) => number>;
+  "js-optimus": async () => {
+    const { assignJobs } = await import("../func/schedulerOptimus.js");
+    return assignJobs;
+  },
+  "cpp-emscripten": async () => {
+    const { default: emscripten } = await import("../func/emscripten/scheduler.js");
+    const { _assignJobs, _write_vector } = await emscripten();
+    return (bins, durations) => {
+      for (const duration of durations) _write_vector(duration);
+      return _assignJobs(bins, durations.length);
+    };
+  },
+  "rust-wasm-pack": async () => {
+    const { assign_jobs } = await import("../func/rust/wasm_grupo_01");
+    return (bins, durations) => assign_jobs(bins, Uint32Array.from(durations));
+  },
+  assemblyscript: async () => {
+    const { assignJobs } = await import("../func/assemblyscript/dist/release");
+    return assignJobs;
+  },
+} satisfies Record<string, () => Promise<(bins: number, durations: number[]) => number>>;
 
-export type FunctionName = keyof typeof functions;
+export type FunctionName = keyof typeof loadFunction;
 
-addEventListener("message", (event) => {
+addEventListener("message", async (event) => {
   const { bins, durations, name, iterations, repetitions } = event.data;
-  const fn = functions[name];
-  if (!fn) throw new Error(`Invalid: ${name}`);
+  const loadFn = loadFunction[name];
+  if (!loadFn) throw new Error(`Invalid: ${name}`);
+  console.time(`Load of ${name}`);
+  const fn = await loadFn();
+  console.timeEnd(`Load of ${name}`);
 
   try {
     for (let i = 0; i < iterations; i++) {

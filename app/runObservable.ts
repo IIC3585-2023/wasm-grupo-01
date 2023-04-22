@@ -19,12 +19,15 @@ export function createRunObservable(api: WorkerInstruction) {
       }
     });
   });
+  const values = new Array(api.iterations).fill(0);
   return observable.pipe(
     scan(
       (acc, value) => {
+        values[acc.iteration] = value.time;
         return {
           name: value.name,
           time: acc.time,
+          values: acc.values,
           result: value.result,
           iteration: acc.iteration + 1,
           average: acc.average + (value.time - acc.average) / (acc.iteration + 1),
@@ -33,6 +36,7 @@ export function createRunObservable(api: WorkerInstruction) {
       },
       {
         name: "",
+        values,
         iteration: 0,
         average: 0,
         variance: 0,

@@ -11,6 +11,7 @@ export type WorkerInstruction = {
 export type WorkerResponse = {
   name: string;
   time: number;
+  values: number[];
   iteration: number;
   result: number;
   average: number;
