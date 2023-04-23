@@ -34,7 +34,8 @@ pnpm install
 
 1. Install Rust with RustUp <https://rustup.rs/>
 2. Go to <https://rustwasm.github.io/wasm-pack/installer>
-3. Build WASM with `pnpm run build:rust`
+3. Run `cargo install wasm-bindgen-cli`
+4. Build WASM with `pnpm run build:rust`
 
 ### Run script
 
