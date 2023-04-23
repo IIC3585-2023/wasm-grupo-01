@@ -31,7 +31,6 @@ export function createRunObservable(api: WorkerInstruction) {
           result: value.result,
           iteration: acc.iteration + 1,
           average: acc.average + (value.time - acc.average) / (acc.iteration + 1),
-          variance: acc.variance + (value.time - acc.average) * (value.time - acc.average),
         };
       },
       {
@@ -39,7 +38,6 @@ export function createRunObservable(api: WorkerInstruction) {
         values,
         iteration: 0,
         average: 0,
-        variance: 0,
         result: 0,
         time: 0,
       } as WorkerResponse

@@ -20,18 +20,18 @@
         <h2 class="text-2xl font-semibold">Assign Actions to Cores</h2>
       </div>
 
-      <form id="run-form">
+      <form id="run-form" class="flex flex-col gap-4">
         <div class="flex gap-1">
           <div>
             <label class="block font-medium pl-1 text-gray-600" for="numCores">Cores</label>
             <input
-              class="h-10 w-24 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              class="h-10 w-16 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
               type="number"
               id="numCores"
               min="2"
               name="bins"
               placeholder="3"
-              value="3"
+              value="5"
               required
             />
           </div>
@@ -44,7 +44,7 @@
               type="text"
               id="actionDurations"
               placeholder="30,50,10,20,90"
-              value="30,50,20,10,15,20,50,90,10,15,5,25,60,40,5,70"
+              value="9,16,2,23,15,3,2,1,7,5,8,25,13,28,12,3,14,0,9,21,4,0,14,15,27,17,4,10,24,18,0"
               name="durations"
               pattern="^([0-9]+, *)*[0-9]+$"
               required
@@ -53,25 +53,12 @@
           <div>
             <label class="block font-medium pl-1 text-gray-600" for="iterations">Iterations</label>
             <input
-              class="h-10 w-36 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              class="h-10 w-28 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
               type="number"
               id="iterations"
               placeholder="1000"
-              value="1000"
+              value="10000"
               name="iterations"
-              pattern="^([0-9]+, *)*[0-9]+$"
-              required
-            />
-          </div>
-          <div>
-            <label class="block font-medium pl-1 text-gray-600" for="repetitions">Repetitions</label>
-            <input
-              class="h-10 w-36 px-3 py-2 leading-tight text-gray-700 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              type="number"
-              id="repetitions"
-              placeholder="1000"
-              value="1000"
-              name="repetitions"
               pattern="^([0-9]+, *)*[0-9]+$"
               required
             />
@@ -79,47 +66,17 @@
           <button class="h-10 ml-2 border bg-purple-700 mt-6 rounded px-3 py-2 text-purple-100">Run</button>
         </div>
 
-        <div>
-          <button
-            data-fn="js-normal"
-            class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-4"
-            type="submit"
-          >
-            Normal JS
-          </button>
+        <div class="grid grid-cols-[max-content_minmax(900px,_1fr)] gap-4">
+          <div class="bg-yellow-500 text-right text-white font-bold py-2 px-4 rounded">Normal JS</div>
           <p id="js-normal"></p>
-          <button
-            data-fn="js-optimus"
-            class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mt-4"
-            type="submit"
-          >
-            Optimus JS
-          </button>
-          <p id="js-optimus"></p>
-          <button
-            data-fn="cpp-emscripten"
-            class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mt-4"
-            type="submit"
-          >
-            C++ WASM (with emscripten)
-          </button>
-          <p id="cpp-emscripten"></p>
-          <button
-            data-fn="rust-wasm-pack"
-            class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-4"
-            type="submit"
-          >
-            Rust WASM (with wasm-pack)
-          </button>
-          <p id="rust-wasm-pack"></p>
-          <button
-            data-fn="assemblyscript"
-            class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mt-4"
-            type="submit"
-          >
-            AssemblyScript
-          </button>
-          <p id="assemblyscript"></p>
+          <div class="bg-purple-500 text-right text-white font-bold py-2 px-4 rounded">C++ WASM (with emscripten)</div>
+          <div id="cpp-emscripten"></div>
+          <div class="bg-orange-500 text-right text-white font-bold py-2 px-4 rounded">Rust WASM (with wasm-pack)</div>
+          <div id="rust-wasm-pack"></div>
+          <div class="bg-blue-500 text-right text-white font-bold py-2 px-4 rounded">AssemblyScript</div>
+          <div id="assemblyscript"></div>
+          <div class="bg-green-500 text-right text-white font-bold py-2 px-4 rounded">??????</div>
+          <div id="js-optimus"></div>
         </div>
       </form>
     </div>
