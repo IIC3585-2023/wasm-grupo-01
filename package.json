@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "build": "vite build",
     "build:rust": "wasm-pack build --release -m no-install --out-dir func/wasm-pack",
-    "build:rust:clean": "rm -rf func/wasm-pack && rm -rf target",
+    "build:rust:clean": "find func/wasm-pack ! -name '.gitkeep' -type f -exec rm {} + && find func/wasm-pack -mindepth 1 -type d -exec rm -rf {} + && rm -rf target",
     "build:cpp": "emcc func/scheduler.cpp -O3 -s EXPORTED_FUNCTIONS=_main,_assignJobs,_write_vector,_malloc,_free -s EXPORTED_RUNTIME_METHODS=ccall -s EXPORT_ES6=1 -o func/emscripten/scheduler.js",
     "build:cpp:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm",
     "build:assemblyscript": "asc func/assemblyscript/scheduler.ts --target release",
