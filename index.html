@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/wasum_logo.png" type="image/png" />
+    <script src="./func/go/wasm_exec.js" ></script>
     <script defer type="module" src="./app/main.ts"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch("./func/go/scheduler.wasm"), go.importObject).then((result) => {
+        console.log("After loading WASM");
+        go.run(result.instance);
+        console.log("result:", result);
+        console.log("go:", go);
+        // failing here
+        // go.AssignJobs(); // Update function name
+      });
+    </script>
     <title>WASM</title>
   </head>
 
@@ -120,6 +132,14 @@
             AssemblyScript
           </button>
           <p id="assemblyscript"></p>
+          <button
+            data-fn="go-wasm"
+            class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded mt-4"
+            type="submit"
+          >
+            Go WASM
+          </button>
+          <p id="go-wasm"></p>
         </div>
       </form>
     </div>

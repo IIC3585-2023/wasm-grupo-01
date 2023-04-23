@@ -5,7 +5,7 @@ import { FunctionName } from "./worker";
 
 import "./style.css";
 
-const functionNames: FunctionName[] = ["js-normal", "js-optimus", "cpp-emscripten", "rust-wasm-pack", "assemblyscript"];
+const functionNames: FunctionName[] = ["js-normal", "js-optimus", "cpp-emscripten", "rust-wasm-pack", "assemblyscript", "go-wasm"];
 
 window.addEventListener("load", async () => {
   const runForm = document.getElementById("run-form")!;

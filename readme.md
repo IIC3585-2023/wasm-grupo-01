@@ -36,6 +36,10 @@ pnpm install
 2. Go to <https://rustwasm.github.io/wasm-pack/installer>
 3. Build WASM with `pnpm run build:rust`
 
+### Install Go
+1. Install Go <https://golang.org/doc/install>
+2. Build WASM with `pnpm run build:go`
+
 ### Run script
 
 ```bash
