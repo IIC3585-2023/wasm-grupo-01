@@ -18,12 +18,20 @@ const loadFunction = {
     };
   },
   "rust-wasm-pack": async () => {
-    const { assign_jobs } = await import("../func/rust/wasm_grupo_01");
+    const { assign_jobs } = await import("../func/wasm-pack/wasm_grupo_01.js");
     return (bins, durations) => assign_jobs(bins, durations);
   },
   assemblyscript: async () => {
     const { assignJobs } = await import("../func/assemblyscript/dist/release");
     return assignJobs;
+  },
+  "go-wasm": async () => {
+    await import("../func/go-wasm/wasm_exec.js");
+    const go = new Go();
+    const { default: init } = await import("../func/go-wasm/scheduler.wasm?init");
+    const instance = await init(go.importObject);
+    go.run(instance);
+    return GoAssignJobs;
   },
 } satisfies Record<string, () => Promise<(bins: number, durations: number[]) => number>>;
 

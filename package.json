@@ -7,10 +7,14 @@
     "dev": "vite",
     "preview": "vite preview",
     "build": "vite build",
-    "build:rust": "wasm-pack build --release -m no-install --out-dir func/rust",
-    "build:emscripten": "emcc func/scheduler.cpp -O3 -s EXPORTED_FUNCTIONS=_main,_assignJobs,_write_vector,_malloc,_free -s EXPORTED_RUNTIME_METHODS=ccall -s EXPORT_ES6=1 -o func/emscripten/scheduler.js",
-    "build:emscripten:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm",
-    "build:assemblyscript": "asc func/assemblyscript/index.ts --target release"
+    "build:rust": "wasm-pack build --release -m no-install --out-dir func/wasm-pack",
+    "build:rust:clean": "rm -rf func/wasm-pack && rm -rf target",
+    "build:cpp": "emcc func/scheduler.cpp -O3 -s EXPORTED_FUNCTIONS=_main,_assignJobs,_write_vector,_malloc,_free -s EXPORTED_RUNTIME_METHODS=ccall -s EXPORT_ES6=1 -o func/emscripten/scheduler.js",
+    "build:cpp:clean": "rm -f func/emscripten/scheduler.js func/emscripten/scheduler.wasm",
+    "build:assemblyscript": "asc func/assemblyscript/scheduler.ts --target release",
+    "build:assemblyscript:clean": "rm -rf func/assemblyscript/dist",
+    "build:go": "GOOS=js GOARCH=wasm go build -o func/go-wasm/scheduler.wasm func/scheduler.go",
+    "build:go:clean": "rm -f func/go-wasm/scheduler.wasm"
   },
   "devDependencies": {
     "assemblyscript": "^0.27.2",

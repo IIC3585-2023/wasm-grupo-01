@@ -24,18 +24,25 @@ npm install -g pnpm
 pnpm install
 ```
 
-### Install Emscripten and add to environment
+### Install Emscripten, add to environment and build cpp
 
 1. Download Emscripten from <https://emscripten.org/docs/getting_started/downloads.html>
 2. Add to environment with `source ./emsdk_env.sh`
-3. Build the wasm with `pnpm run build:emscripten`
+3. Build the wasm with `pnpm run build:cpp`
 
-### Install Wasm-Pack
+### Install Wasm-Pack and build rust
 
 1. Install Rust with RustUp <https://rustup.rs/>
 2. Go to <https://rustwasm.github.io/wasm-pack/installer>
 3. Run `cargo install wasm-bindgen-cli`
 4. Build WASM with `pnpm run build:rust`
+
+### Install and build Go
+1. Install Go <https://golang.org/doc/install>
+2. Build WASM with `pnpm run build:go`
+
+### Build AssemblyScript
+1. Build using this: `pnpm build:assemblyscript`
 
 ### Run script
 

@@ -5,7 +5,14 @@ import { FunctionName } from "./worker";
 
 import "./style.css";
 
-const functionNames: FunctionName[] = ["js-normal", "cpp-emscripten", "rust-wasm-pack", "assemblyscript", "js-optimus"];
+const functionNames: FunctionName[] = [
+  "js-normal",
+  "cpp-emscripten",
+  "rust-wasm-pack",
+  "assemblyscript",
+  "go-wasm",
+  "js-optimus",
+];
 
 window.addEventListener("load", async () => {
   const runForm = document.getElementById("run-form")!;
@@ -18,14 +25,13 @@ window.addEventListener("load", async () => {
     const bins = Number(formData.get("bins"));
     const durations = (formData.get("durations") as string).split(",").map(Number);
     const iterations = Number(formData.get("iterations"));
-    const repetitions = Number(formData.get("repetitions"));
 
     event.preventDefault();
     cancelCurrent();
 
     const fns = functionNames.map((name) => ({
       element: document.getElementById(name)!,
-      observable: createRunObservable({ name, bins, durations, iterations, repetitions }),
+      observable: createRunObservable({ name, bins, durations, iterations }),
     }));
 
     const runSubscription = concat(
