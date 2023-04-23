@@ -3,7 +3,6 @@
     "release": {
       "outFile": "func/assemblyscript/dist/release.wasm",
       "textFile": "func/assemblyscript/dist/release.wat",
-      "sourceMap": true,
       "optimizeLevel": 3,
       "shrinkLevel": 0,
       "converge": false,

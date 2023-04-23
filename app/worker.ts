@@ -1,3 +1,5 @@
+import type { WorkerInstruction } from "./types.js";
+
 const loadFunction = {
   "js-normal": async () => {
     const { assignJobs } = await import("../func/schedulerNormal.js");
@@ -17,7 +19,7 @@ const loadFunction = {
   },
   "rust-wasm-pack": async () => {
     const { assign_jobs } = await import("../func/rust/wasm_grupo_01");
-    return (bins, durations) => assign_jobs(bins, Uint32Array.from(durations));
+    return (bins, durations) => assign_jobs(bins, durations);
   },
   assemblyscript: async () => {
     const { assignJobs } = await import("../func/assemblyscript/dist/release");
@@ -41,7 +43,7 @@ const loadFunction = {
 export type FunctionName = keyof typeof loadFunction;
 
 addEventListener("message", async (event) => {
-  const { bins, durations, name, iterations, repetitions } = event.data;
+  const { bins, durations, name, iterations } = event.data as WorkerInstruction;
   const loadFn = loadFunction[name];
   if (!loadFn) throw new Error(`Invalid: ${name}`);
   console.time(`Load of ${name}`);
@@ -51,7 +53,6 @@ addEventListener("message", async (event) => {
   try {
     for (let i = 0; i < iterations; i++) {
       const startTime = performance.now();
-      for (let j = 1; j < repetitions; j++) fn(bins, durations);
       const result = fn(bins, durations);
       const time = performance.now() - startTime;
       postMessage({ name, time, result });
