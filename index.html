@@ -4,19 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./assets/wasum_logo.png" type="image/png" />
-    <script src="./func/go/wasm_exec.js" ></script>
     <script defer type="module" src="./app/main.ts"></script>
-    <script>
-      const go = new Go();
-      WebAssembly.instantiateStreaming(fetch("./func/go/scheduler.wasm"), go.importObject).then((result) => {
-        console.log("After loading WASM");
-        go.run(result.instance);
-        console.log("result:", result);
-        console.log("go:", go);
-        // failing here
-        // go.AssignJobs(); // Update function name
-      });
-    </script>
     <title>WASM</title>
   </head>
 
@@ -87,10 +75,10 @@
           <div id="rust-wasm-pack"></div>
           <div class="bg-blue-500 text-right text-white font-bold py-2 px-4 rounded">AssemblyScript WASM</div>
           <div id="assemblyscript"></div>
-          <div class="bg-slate-700 text-right text-white font-bold py-2 px-4 rounded">??????</div>
-          <div id="js-optimus"></div>
           <div class="bg-sky-500 text-right text-white font-bold py-2 px-4 rounded">Go WASM</div>
           <div id="go-wasm"></div>
+          <div class="bg-slate-700 text-right text-white font-bold py-2 px-4 rounded">??????</div>
+          <div id="js-optimus"></div>
         </div>
       </form>
     </div>

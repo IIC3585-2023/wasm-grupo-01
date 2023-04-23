@@ -10,8 +10,8 @@ const functionNames: FunctionName[] = [
   "cpp-emscripten",
   "rust-wasm-pack",
   "assemblyscript",
-  "js-optimus",
   "go-wasm",
+  "js-optimus",
 ];
 
 window.addEventListener("load", async () => {
