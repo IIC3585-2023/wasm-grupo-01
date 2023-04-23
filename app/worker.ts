@@ -28,16 +28,11 @@ const loadFunction = {
   "go-wasm": async () => {
     await import("../func/go/wasm_exec.js");
     const go = new Go();
-    WebAssembly.instantiateStreaming(fetch("../func/go/scheduler.wasm"), go.importObject).then((result) => {
-      go.run(result.instance);
-      console.log(result);
-      console.log(go);
-    });
-    function assignJobs(bins, durations) {
-      return bins + durations.length;
-    }
-    return assignJobs;
-  }
+    const { default: init } = await import("../func/go/scheduler.wasm?init");
+    const instance = await init(go.importObject);
+    go.run(instance);
+    return GoAssignJobs;
+  },
 } satisfies Record<string, () => Promise<(bins: number, durations: number[]) => number>>;
 
 export type FunctionName = keyof typeof loadFunction;
