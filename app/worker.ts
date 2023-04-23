@@ -18,7 +18,7 @@ const loadFunction = {
     };
   },
   "rust-wasm-pack": async () => {
-    const { assign_jobs } = await import("../func/rust/wasm_grupo_01");
+    const { assign_jobs } = await import("../func/wasm-pack/wasm_grupo_01.js");
     return (bins, durations) => assign_jobs(bins, durations);
   },
   assemblyscript: async () => {
@@ -26,9 +26,9 @@ const loadFunction = {
     return assignJobs;
   },
   "go-wasm": async () => {
-    await import("../func/go/wasm_exec.js");
+    await import("../func/go-wasm/wasm_exec.js");
     const go = new Go();
-    const { default: init } = await import("../func/go/scheduler.wasm?init");
+    const { default: init } = await import("../func/go-wasm/scheduler.wasm?init");
     const instance = await init(go.importObject);
     go.run(instance);
     return GoAssignJobs;
