@@ -1,8 +1,12 @@
 import type { WorkerInstruction } from "./types.js";
 
 const loadFunction = {
-  "js-normal": async () => {
-    const { assignJobs } = await import("../func/schedulerNormal.js");
+  "js-for-each": async () => {
+    const { assignJobs } = await import("../func/schedulerForEach");
+    return assignJobs;
+  },
+  "js-for-iter": async () => {
+    const { assignJobs } = await import("../func/schedulerFor");
     return assignJobs;
   },
   "js-optimus": async () => {
