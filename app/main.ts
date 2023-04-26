@@ -6,7 +6,8 @@ import { FunctionName } from "./worker";
 import "./style.css";
 
 const functionNames: FunctionName[] = [
-  "js-normal",
+  "js-for-each",
+  "js-for-iter",
   "cpp-emscripten",
   "rust-wasm-pack",
   "assemblyscript",

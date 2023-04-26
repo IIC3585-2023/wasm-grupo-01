@@ -5,7 +5,7 @@ export function assignJobs(M, durations) {
   const jobs = durations.map((duration, index) => ({ duration, index })).sort((a, b) => b.duration - a.duration);
   jobs.forEach((job) => {
     const minTotalTimeCluster = totalTimes.indexOf(Math.min(...totalTimes));
-    clusters[minTotalTimeCluster].push(job.index);
+    clusters[minTotalTimeCluster] = [...clusters[minTotalTimeCluster], job.index];
     totalTimes[minTotalTimeCluster] += job.duration;
   });
   const totalTime = Math.max(...totalTimes);
