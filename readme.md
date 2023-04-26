@@ -1,8 +1,12 @@
 # Wasm - Grupo 1
 
-This is WASM
+This a project that compares the performance of different languages when running in the browser using WebAssembly.
 
-- https://depth-first.com/articles/2019/10/16/compiling-c-to-webassembly-and-running-it-without-emscripten/
+The resources used for this project are:
+
+- [Web Page](https://wasm-web-uc.pages.dev/)
+- [Worker that calls the wasm](https://github.com/IIC3585-2023/wasm-grupo-01/blob/main/app/worker.ts)
+- [Presentation](https://github.com/IIC3585-2023/wasm-grupo-01/blob/main/slides/web-wasm.pdf)
 
 ## Contributors
 
